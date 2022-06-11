@@ -13,9 +13,9 @@ from PyQt5.QtCore import QDateTime
 from PyQt5.QtWidgets import QMainWindow, QLabel
 from PyQt5.QtGui import QPalette, QBrush, QPixmap
 import shutil
-from db import DB
+from sql import DB
 
-# DB = DB("gg.db")
+DB = DB("database.db")
 START_DATE = []
 END_DATE = []
 SECURITY_LIST = []
@@ -206,7 +206,7 @@ def dates(start, end, ticket):
     SECURITY_LIST.append(ticket)
     START_DATE.append(start)
     END_DATE.append(end)
-    # DB.create_table_all_secid(ticket)
+    DB.create_table_all_secid(ticket)
 
 
 def graphs():
@@ -222,8 +222,8 @@ def graphs():
         dates, values = data_manager.give_data(ticket)
     columns += [values]
     list1 = []
-    # for i in range(0, len(dates)):
-        # DB.add_secid(ticket, ticket, values[i], dates[i][:-9])
+    for i in range(0, len(dates)):
+        DB.add_secid(ticket, ticket, values[i], dates[i][:-9])
     date1 = dates[0][:-9]
     date2 = dates[len(dates) - 1][:-9]
     normalisedate1 = int(date1.replace("-", ""))
